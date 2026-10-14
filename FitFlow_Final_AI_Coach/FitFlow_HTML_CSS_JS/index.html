@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070909">
+  <title>FITFLOW — Your Body. Your Plan.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="noise"></div>
+<div id="toast"></div>
+
+<!-- AUTH -->
+<section id="authScreen" class="auth-screen">
+  <div class="auth-visual">
+    <div class="orb orb-a"></div><div class="orb orb-b"></div>
+    <div class="auth-grid"></div>
+    <div class="vertical-text">FITNESS / NUTRITION / PERFORMANCE / DISCIPLINE</div>
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse-dot"></span> PERSONAL FITNESS OS</div>
+      <h1>BUILD<br><span>YOUR</span><br>BEAST.</h1>
+      <p>Your body. Your lifestyle. Your plan.</p>
+      <div class="hero-stats">
+        <span><b>01</b> Adaptive</span><span><b>02</b> Evidence-led</span><span><b>03</b> Built for you</span>
+      </div>
+    </div>
+  </div>
+  <div class="auth-panel">
+    <div class="brand"><span class="brand-mark">F</span> FITFLOW</div>
+    <div class="auth-card">
+      <div class="auth-role-tabs">
+        <button class="active" data-role="user">USER</button>
+        <button data-role="admin">ADMIN</button>
+      </div>
+      <div class="auth-tabs">
+        <button class="active" data-auth="login">LOGIN</button>
+        <button data-auth="register">REGISTER</button>
+      </div>
+
+      <div id="userAuth">
+        <form id="loginForm">
+          <div class="form-heading"><span>WELCOME BACK</span><h2>Ready to work?</h2><p>Enter the arena.</p></div>
+          <label>Username<input name="username" required placeholder="yourname"></label>
+          <label>Password<input name="password" type="password" required placeholder="••••••••"></label>
+          <button class="btn btn-lime btn-full">ENTER FITFLOW <i>↗</i></button>
+          <p class="form-error" id="loginError"></p>
+        </form>
+        <form id="registerForm" class="hidden">
+          <div class="form-heading"><span>NEW ATHLETE</span><h2>Create your base.</h2><p>Your journey starts here.</p></div>
+          <label>Username<input name="username" minlength="3" required placeholder="yourname"></label>
+          <label>Password<input name="password" type="password" minlength="6" required placeholder="6+ chars + special"></label>
+          <label>Confirm password<input name="confirm" type="password" required placeholder="repeat password"></label>
+          <div class="password-rule"><span>✓ 6+ characters</span><span>✓ 1 special character</span></div>
+          <button class="btn btn-lime btn-full">CREATE ACCOUNT <i>↗</i></button>
+          <p class="form-error" id="registerError"></p>
+        </form>
+      </div>
+
+      <div id="adminAuth" class="hidden">
+        <form id="adminLoginForm">
+          <div class="form-heading"><span>ADMIN COMMAND</span><h2>Control center.</h2><p>Manage the FITFLOW community.</p></div>
+          <label>Admin username<input name="username" required placeholder="admin"></label>
+          <label>Password<input name="password" type="password" required placeholder="••••••••"></label>
+          <button class="btn btn-lime btn-full">ENTER ADMIN PANEL <i>↗</i></button>
+          <p class="form-error" id="adminLoginError"></p>
+        </form>
+        <form id="adminRegisterForm" class="hidden">
+          <div class="form-heading"><span>NEW ADMIN</span><h2>Create admin access.</h2><p>Use the project admin access code.</p></div>
+          <label>Admin username<input name="username" minlength="3" required placeholder="adminname"></label>
+          <label>Password<input name="password" type="password" minlength="6" required placeholder="6+ chars + special"></label>
+          <label>Confirm password<input name="confirm" type="password" required placeholder="repeat password"></label>
+          <label>Admin access code<input name="code" type="password" required placeholder="project access code"></label>
+          <div class="password-rule"><span>✓ 6+ characters</span><span>✓ 1 special character</span></div>
+          <button class="btn btn-lime btn-full">CREATE ADMIN <i>↗</i></button>
+          <p class="form-error" id="adminRegisterError"></p>
+        </form>
+      </div>
+    </div>
+    <small class="auth-foot">FITFLOW v1.0 • PERSONAL FITNESS OS</small>
+  </div>
+</section>
+
+<!-- ONBOARDING -->
+<section id="onboarding" class="onboarding hidden">
+  <header class="onboard-top">
+    <div class="brand"><span class="brand-mark">F</span> FITFLOW</div>
+    <div class="on-step" id="onStep">WORKOUT · 01 / 10</div>
+  </header>
+
+  <div class="onboard-stage">
+    <div class="fitness-3d">
+      <div class="ring-3d ring-one"></div>
+      <div class="ring-3d ring-two"></div>
+      <div class="core-3d">F</div>
+      <div class="orbit-dot dot-one"></div><div class="orbit-dot dot-two"></div>
+      <div class="float-card fc-one">01 <span>BASELINE</span></div>
+      <div class="float-card fc-two">FIT<span>FLOW</span></div>
+      <div class="vertical-text">ASSESS / CUSTOMIZE / ADAPT</div>
+    </div>
+
+    <div class="onboard-wrap">
+      <div class="wizard-tabs">
+        <button type="button" class="wizard-tab active" data-wizard="workout"><span>01</span> WORKOUT</button>
+        <button type="button" class="wizard-tab" data-wizard="diet"><span>02</span> DIET</button>
+      </div>
+      <div class="progress-line"><span id="onProgress"></span></div>
+
+      <form id="onboardingForm">
+        <div id="wizardWorkout" class="wizard-track">
+          <div class="wizard-question active" data-wstep="1">
+            <div class="step-kicker">WORKOUT / 01</div>
+            <h2>What are we<br><em>building?</em></h2>
+            <p>Pick the outcome that matters most. Everything else follows from this.</p>
+            <div class="choice-grid">
+              <button type="button" class="choice" data-field="goal" data-value="fat_loss">🔥 <b>FAT LOSS</b><small>Get leaner</small></button>
+              <button type="button" class="choice" data-field="goal" data-value="muscle_gain">💪 <b>MUSCLE GAIN</b><small>Build muscle</small></button>
+              <button type="button" class="choice" data-field="goal" data-value="recomp">⚡ <b>RECOMPOSITION</b><small>Build + lean out</small></button>
+              <button type="button" class="choice" data-field="goal" data-value="fitness">🏃 <b>FITNESS</b><small>Build your base</small></button>
+              <button type="button" class="choice" data-field="goal" data-value="strength">🏆 <b>STRENGTH</b><small>Get stronger</small></button>
+              <button type="button" class="choice" data-field="goal" data-value="endurance">🫀 <b>ENDURANCE</b><small>Build stamina</small></button>
+            </div>
+          </div>
+
+          <div class="wizard-question" data-wstep="2">
+            <div class="step-kicker">WORKOUT / 02</div><h2>How old is<br><em>the athlete?</em></h2><p>Used only to keep your plan appropriate for your baseline.</p>
+            <div class="big-control"><output data-out="age">19</output><input name="age" data-slider="age" type="range" min="13" max="80" value="19"><span>YEARS</span></div>
+          </div>
+
+          <div class="wizard-question" data-wstep="3">
+            <div class="step-kicker">WORKOUT / 03</div><h2>What's your<br><em>body baseline?</em></h2><p>Use the sliders. No typing required.</p>
+            <div class="dual-control">
+              <div class="control-box"><label>HEIGHT</label><output data-out="height">175</output><span>CM</span><input name="height" data-slider="height" type="range" min="130" max="220" value="175"></div>
+              <div class="control-box"><label>WEIGHT</label><output data-out="weight">70</output><span>KG</span><input name="weight" data-slider="weight" type="range" min="35" max="180" value="70" step=".5"></div>
+            </div>
+            <select name="gender" class="hidden-select"><option>Male</option><option>Female</option><option>Other</option></select>
+          </div>
+
+          <div class="wizard-question" data-wstep="4">
+            <div class="step-kicker">WORKOUT / 04</div><h2>How many days can<br><em>you actually train?</em></h2><p>Choose what fits your real schedule, not your ideal week.</p>
+            <div class="big-control"><output data-out="days">3</output><input name="days" data-slider="days" type="range" min="1" max="7" value="3"><span>DAYS / WEEK</span></div>
+          </div>
+
+          <div class="wizard-question" data-wstep="5">
+            <div class="step-kicker">WORKOUT / 05</div><h2>How long is your<br><em>training window?</em></h2><p>We'll build the session around the time you have.</p>
+            <div class="big-control"><output data-out="minutes">45</output><input name="minutes" data-slider="minutes" type="range" min="15" max="120" value="45" step="5"><span>MINUTES</span></div>
+          </div>
+
+          <div class="wizard-question" data-wstep="6">
+            <div class="step-kicker">WORKOUT / 06</div><h2>Where do you<br><em>train?</em></h2><p>Equipment changes what we can build.</p>
+            <div class="choice-grid compact-choices">
+              <button type="button" class="choice" data-field="location" data-value="Gym">🏋️ <b>GYM</b></button>
+              <button type="button" class="choice" data-field="location" data-value="Home">🏠 <b>HOME</b></button>
+              <button type="button" class="choice" data-field="location" data-value="Outdoor">🌳 <b>OUTDOOR</b></button>
+              <button type="button" class="choice" data-field="location" data-value="Combination">◈ <b>COMBINATION</b></button>
+            </div>
+          </div>
+
+          <div class="wizard-question" data-wstep="7">
+            <div class="step-kicker">WORKOUT / 07</div><h2>What's your<br><em>experience level?</em></h2><p>Be honest. The system scales from your starting point.</p>
+            <div class="choice-grid compact-choices">
+              <button type="button" class="choice" data-field="level" data-value="Beginner">01 <b>BEGINNER</b><small>New / returning</small></button>
+              <button type="button" class="choice" data-field="level" data-value="Intermediate">02 <b>INTERMEDIATE</b><small>Consistent training</small></button>
+              <button type="button" class="choice" data-field="level" data-value="Advanced">03 <b>ADVANCED</b><small>Experienced</small></button>
+            </div>
+          </div>
+
+          <div class="wizard-question" data-wstep="8">
+            <div class="step-kicker">WORKOUT / 08</div><h2>How active are you<br><em>outside training?</em></h2><p>This helps estimate your total daily energy demand.</p>
+            <div class="choice-grid compact-choices">
+              <button type="button" class="choice" data-field="activity" data-value="sedentary">01 <b>MOSTLY SITTING</b></button>
+              <button type="button" class="choice" data-field="activity" data-value="light">02 <b>LIGHTLY ACTIVE</b></button>
+              <button type="button" class="choice" data-field="activity" data-value="moderate">03 <b>MODERATELY ACTIVE</b></button>
+              <button type="button" class="choice" data-field="activity" data-value="high">04 <b>VERY ACTIVE</b></button>
+            </div>
+          </div>
+
+          <div class="wizard-question" data-wstep="9">
+            <div class="step-kicker">WORKOUT / 09</div><h2>What's your current<br><em>fitness baseline?</em></h2><p>Quick performance markers. Use zero if you can't do an exercise yet.</p>
+            <div class="dual-control fitness-controls">
+              <div class="control-box"><label>PUSH-UPS</label><output data-out="pushups">10</output><input name="pushups" data-slider="pushups" type="range" min="0" max="100" value="10"><span>REPS</span></div>
+              <div class="control-box"><label>PULL-UPS</label><output data-out="pullups">0</output><input name="pullups" data-slider="pullups" type="range" min="0" max="30" value="0"><span>REPS</span></div>
+              <div class="control-box"><label>SQUATS</label><output data-out="squats">20</output><input name="squats" data-slider="squats" type="range" min="0" max="150" value="20"><span>REPS</span></div>
+              <div class="control-box"><label>PLANK</label><output data-out="plank">30</output><input name="plank" data-slider="plank" type="range" min="0" max="300" value="30"><span>SECONDS</span></div>
+            </div>
+          </div>
+
+          <div class="wizard-question" data-wstep="10">
+            <div class="step-kicker">WORKOUT / 10</div><h2>Anything we should<br><em>build around?</em></h2><p>Optional. Add exercises, sports, preferences, or constraints that matter to your training.</p>
+            <div class="choice-grid compact-choices">
+              <button type="button" class="choice" data-field="trainingStyle" data-value="Weights">🏋️ <b>WEIGHTS</b></button>
+              <button type="button" class="choice" data-field="trainingStyle" data-value="Bodyweight">🤸 <b>BODYWEIGHT</b></button>
+              <button type="button" class="choice" data-field="trainingStyle" data-value="Running">🏃 <b>RUNNING / CARDIO</b></button>
+              <button type="button" class="choice" data-field="trainingStyle" data-value="Mixed">⚡ <b>MIXED</b></button>
+            </div>
+            <button type="button" class="btn btn-lime next-manual">CONTINUE →</button>
+          </div>
+        </div>
+
+        <div id="wizardDiet" class="wizard-track hidden">
+          <div class="wizard-question active" data-dstep="1">
+            <div class="step-kicker">DIET / 01</div><h2>Choose your<br><em>food framework.</em></h2><p>Pick the foods you can actually eat. FitFlow will build the week from your choices.</p>
+            <div class="choice-grid">
+              <button type="button" class="choice" data-field="dietType" data-value="Vegetarian">🌱 <b>VEGETARIAN</b><small>Plant foods + dairy</small></button>
+              <button type="button" class="choice" data-field="dietType" data-value="Non-vegetarian">🥩 <b>NON-VEGETARIAN</b><small>Veg + eggs + meat/fish</small></button>
+              <button type="button" class="choice" data-field="dietType" data-value="Vegan">🌿 <b>VEGAN</b><small>100% plant-based</small></button>
+            </div>
+          </div>
+          <div class="wizard-question" data-dstep="2">
+            <div class="step-kicker">DIET / 02</div><h2>Choose your<br><em>protein sources.</em></h2><p>No typing. Select everything you are happy to eat.</p>
+            <div id="proteinOptions" class="food-option-grid"></div>
+            <button type="button" class="btn btn-lime next-manual">CONTINUE →</button>
+          </div>
+          <div class="wizard-question" data-dstep="3">
+            <div class="step-kicker">DIET / 03</div><h2>Choose your<br><em>carbs & staples.</em></h2><p>Pick the staples you want repeated with small day-to-day variations.</p>
+            <div id="carbOptions" class="food-option-grid"></div>
+            <button type="button" class="btn btn-lime next-manual">CONTINUE →</button>
+          </div>
+          <div class="wizard-question" data-dstep="4">
+            <div class="step-kicker">DIET / 04</div><h2>Add your<br><em>fruit, veg & extras.</em></h2><p>Choose the foods, vegetables, fruits and extras you want available in your plan.</p>
+            <div id="produceOptions" class="food-option-grid"></div>
+            <button type="button" class="btn btn-lime next-manual">CONTINUE →</button>
+          </div>
+          <div class="wizard-question" data-dstep="5">
+            <div class="step-kicker">DIET / 05</div><h2>Any foods to<br><em>avoid?</em></h2><p>Tap foods you do not want included. No typing required.</p>
+            <div id="avoidOptions" class="food-option-grid"></div>
+            <button type="button" class="btn btn-lime next-manual">CONTINUE →</button>
+          </div>
+          <div class="wizard-question" data-dstep="6">
+            <div class="step-kicker">DIET / 06</div><h2>How many meals<br><em>feel right?</em></h2><p>Choose the structure. FitFlow handles the actual menu.</p>
+            <div class="big-control"><output data-out="mealCount">4</output><input name="mealCount" data-slider="mealCount" type="range" min="2" max="6" value="4"><span>MEALS / DAY</span></div>
+          </div>
+        </div>
+      </form>
+
+      <div class="on-actions">
+        <button type="button" class="btn btn-ghost" id="onBack">← BACK</button>
+        <button type="button" class="btn btn-lime" id="onNext">CONTINUE →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <div class="side-brand"><span class="brand-mark">F</span><span>FITFLOW</span></div>
+    <div class="side-label">COMMAND</div>
+    <nav>
+      <button class="nav active" data-page="home"><i>⌂</i> Overview</button>
+      <button class="nav" data-page="workout"><i>⚡</i> Workout</button>
+      <button class="nav" data-page="nutrition"><i>◒</i> Nutrition</button>
+      <button class="nav" data-page="progress"><i>↗</i> Progress</button>
+      <button class="nav" data-page="checkin"><i>✓</i> Check-In</button>
+      <button class="nav" data-page="coach"><i>✦</i> AI Coach</button>
+      <button class="nav" data-page="research"><i>◈</i> Research</button>
+    </nav>
+    <div class="side-label">ACCOUNT</div>
+    <nav><button class="nav" data-page="profile"><i>◎</i> Profile</button><button class="nav" id="logoutBtn"><i>↪</i> Logout</button></nav>
+    <div class="sidebar-foot"><span class="online-dot"></span> SYSTEM ONLINE</div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><button class="mobile-menu" id="mobileMenu">☰</button><div class="crumb">FITFLOW / <b id="crumb">OVERVIEW</b></div><div class="top-actions"><span id="today"></span><button class="icon-btn" id="themeBtn">◐</button><div class="avatar" id="avatar">A</div></div></header>
+
+    <section class="page active" id="page-home">
+      <div class="page-head"><div><span class="eyebrow">PERSONAL FITNESS OS</span><h1>GOOD MORNING, <em id="userName">ATHLETE</em>.</h1><p id="motto">Your plan adapts as you do.</p></div><div class="streak"><small>STREAK</small><b id="streakNum">07</b><span>DAYS</span></div></div>
+      <div class="command-strip"><div><span>TODAY'S MISSION</span><b id="mission">FULL BODY / 45 MIN</b></div><button class="btn btn-lime" data-goto="workout">START WORKOUT ↗</button></div>
+      <div class="metric-grid" id="homeMetrics"></div>
+      <div class="home-grid">
+        <div class="card chart-card"><div class="card-head"><div><span class="eyebrow">BODY TREND</span><h3>Weight trajectory</h3></div><select id="rangeSelect"><option>4 WEEKS</option><option>12 WEEKS</option></select></div><canvas id="weightChart"></canvas><div class="chart-legend"><span><i class="dot lime"></i> Actual</span><span><i class="dash"></i> Target</span></div></div>
+        <div class="card coach-card"><div class="card-head"><div><span class="eyebrow">FITFLOW INTELLIGENCE</span><h3>Today's signals</h3></div><span class="live">LIVE</span></div><div id="signals"></div><button class="text-btn" data-goto="coach">OPEN COACH →</button></div>
+      </div>
+      <div class="split-feature"><button class="feature workout-feature" data-goto="workout"><span>01 / WORKOUT</span><h2>TRAIN<br>WITH INTENT.</h2><p id="workoutTeaser">Personalized session built around your experience and time.</p><b>ENTER TRAINING ROOM ↗</b><div class="feature-ring">⚡</div></button><button class="feature nutrition-feature" data-goto="nutrition"><span>02 / NUTRITION</span><h2>FUEL<br>THE MISSION.</h2><p>Smart changes based on what you already eat.</p><b>OPEN FUEL LAB ↗</b><div class="feature-ring">◒</div></button></div>
+    </section>
+
+    <section class="page" id="page-workout">
+      <div class="section-hero workout-hero"><div><span class="eyebrow lime">WORKOUT / TRAINING ROOM</span><h1>BUILD<br><em>POWER.</em></h1><p id="workoutMeta">Your complete training week, built around your answers.</p></div><div class="hero-number">01</div></div>
+      <div class="workout-layout"><div class="workout-main"><div class="session-bar"><div><span>YOUR TRAINING WEEK</span><h2 id="sessionTitle">FULL BODY</h2></div><div><b id="sessionDuration">45</b><small> MIN</small></div><button class="btn btn-lime" id="startWorkout">START DAY 1</button></div><div id="weeklyWorkoutPlan" class="weekly-plan"></div></div><div class="workout-side"><div class="card"><span class="eyebrow lime">PLAN BUILDER</span><h3 id="workoutPlanSummary">Your week, day by day.</h3><p id="workoutDaysSummary">Each selected training day has its own session.</p></div><div class="card"><span class="eyebrow">PROGRESSION RULE</span><h3>One variable at a time.</h3><p>Progress through reps, sets, resistance, technique, range of motion or harder variations.</p></div></div></div>
+    </section>
+
+    <section class="page" id="page-nutrition">
+      <div class="section-hero nutrition-hero"><div><span class="eyebrow orange">NUTRITION / FUEL LAB</span><h1>FUEL<br><em>THE BEAST.</em></h1><p id="nutritionMeta">Your complete 7-day diet plan, generated from the foods you selected.</p></div><div class="calorie-orbit"><div><b id="calTarget">—</b><small>KCAL TARGET</small></div></div></div>
+      <div class="nutrition-metrics" id="nutritionMetrics"></div>
+      <div class="card"><div class="card-head"><div><span class="eyebrow orange">7-DAY FUEL PLAN</span><h3>Follow it Monday → Sunday</h3></div><span class="pill orange-pill">1 CHEAT DAY</span></div><div id="weeklyDietPlan" class="weekly-diet-plan"></div></div>
+    </section>
+
+    <section class="page" id="page-progress">
+      <div class="page-head"><div><span class="eyebrow">PROGRESS LAB</span><h1>PROOF OVER <em>PROMISES.</em></h1><p>Your trend tells the truth. Look at averages, not single-day noise.</p></div><button class="btn btn-lime" id="logProgress">+ LOG PROGRESS</button></div>
+      <div class="metric-grid" id="progressMetrics"></div>
+      <div class="card chart-card large"><div class="card-head"><div><span class="eyebrow">ACTUAL VS TARGET</span><h3>Weight trend</h3></div><span class="pill">LIVE DATA</span></div><canvas id="progressChart"></canvas></div>
+      <div class="progress-grid"><div class="card"><span class="eyebrow">BODY MEASUREMENTS</span><div id="measurements" class="measurements"></div></div><div class="card"><span class="eyebrow">FITNESS SCOREBOARD</span><div id="scoreboard"></div></div></div>
+    </section>
+
+    <section class="page" id="page-checkin">
+      <div class="page-head"><div><span class="eyebrow">WEEKLY CHECK-IN</span><h1>MEASURE.<br><em>ADAPT.</em></h1><p>Every week gives FitFlow better data.</p></div></div>
+      <div class="checkin-layout"><form class="card checkin-form" id="checkinForm"><div class="check-grid"><label>Current weight<input name="weight" type="number" step=".1"></label><label>Avg daily steps<input name="steps" type="number"></label><label>Workout completion %<input name="workout" type="number" min="0" max="100"></label><label>Diet adherence %<input name="adherence" type="number" min="0" max="100"></label></div><div class="slider-block"><label>Hunger <output id="hungerOut">5</output><input type="range" name="hunger" min="1" max="10" value="5"></label><label>Energy <output id="energyOut">7</output><input type="range" name="energy" min="1" max="10" value="7"></label><label>Sleep <output id="sleepOut">7</output><input type="range" name="sleep" min="1" max="10" value="7"></label><label>Stress <output id="stressOut">4</output><input type="range" name="stress" min="1" max="10" value="4"></label></div><label>Workout performance<textarea name="performance" placeholder="Did lifts/reps improve?"></textarea></label><label>Pain / discomfort<textarea name="pain" placeholder="Anything to flag?"></textarea></label><label>Diet difficulty<textarea name="difficulty" placeholder="What was hardest to follow?"></textarea></label><button class="btn btn-lime btn-full">SUBMIT CHECK-IN →</button></form><div class="card checkin-side"><span class="eyebrow">ADAPTATION ENGINE</span><h3>What happens next?</h3><div class="adapt-step"><b>01</b><span>Compare expected vs actual trend.</span></div><div class="adapt-step"><b>02</b><span>Check adherence, hunger, energy, sleep.</span></div><div class="adapt-step"><b>03</b><span>Make small adjustments if needed.</span></div><div class="adapt-step"><b>04</b><span>Never make reckless sudden changes.</span></div></div></div>
+    </section>
+
+    <section class="page" id="page-coach">
+      <div class="section-hero coach-hero"><div><span class="eyebrow cyan">FITFLOW INTELLIGENCE</span><h1>YOUR<br><em>COACH.</em></h1><p>AI-style explanations built from your inputs, targets and progress.</p></div><div class="brain">✦</div></div>
+      <div class="coach-layout"><div class="card coach-chat"><div class="coach-message bot"><span>FF</span><div><b>FITFLOW COACH</b><p id="coachOpening">I’ve analyzed your current plan. Ask me about today's training, nutrition or progress.</p></div></div><div id="chatMessages"></div><form id="chatForm"><input name="message" placeholder="Ask: Why this calorie target?" required><button class="btn btn-cyan">SEND ↗</button></form></div><div class="card coach-insights"><span class="eyebrow cyan">PERSONAL SIGNALS</span><div id="coachSignals"></div></div></div>
+    </section>
+
+    <section class="page" id="page-research">
+      <div class="page-head"><div><span class="eyebrow">EVIDENCE LIBRARY</span><h1>WHY FITFLOW<br><em>RECOMMENDS.</em></h1><p>Recommendations should be explainable and evidence-aware.</p></div></div>
+      <div class="evidence-grid" id="evidenceGrid"></div>
+    </section>
+
+    <section class="page" id="page-profile">
+      <div class="page-head"><div><span class="eyebrow">ATHLETE PROFILE</span><h1>YOUR<br><em>DATA.</em></h1></div></div>
+      <div class="profile-grid"><div class="card profile-card"><div class="avatar big" id="profileAvatar">A</div><h2 id="profileName">Athlete</h2><p id="profileUsername">@athlete</p><div id="profileStats"></div><button class="btn btn-lime" id="editProfile">EDIT PROFILE</button></div><div class="card"><span class="eyebrow">SAFETY</span><h3>Know the limits.</h3><p>FitFlow is an educational fitness platform. It does not diagnose disease, prescribe medication, or replace qualified doctors, dietitians or physiotherapists.</p><div class="safety-list"><span>✓ No dangerous calorie restriction</span><span>✓ No extreme exercise challenges</span><span>✓ No medical diagnosis</span><span>✓ Professional review when appropriate</span></div></div></div>
+    </section>
+  </main>
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp" class="app hidden">
+  <aside class="sidebar">
+    <div class="side-brand"><span class="brand-mark">F</span><span>FITFLOW</span></div>
+    <div class="side-label">ADMIN COMMAND</div>
+    <nav>
+      <button class="nav active" data-admin-page="overview"><i>⌂</i> Dashboard</button>
+      <button class="nav" data-admin-page="users"><i>◎</i> Users</button>
+      <button class="nav" data-admin-page="analytics"><i>↗</i> Analytics</button>
+      <button class="nav" data-admin-page="plans"><i>⚡</i> Plans</button>
+      <button class="nav" data-admin-page="checkins"><i>✓</i> Check-Ins</button>
+    </nav>
+    <div class="side-label">SYSTEM</div>
+    <nav>
+      <button class="nav" data-admin-page="settings"><i>◈</i> System Info</button>
+      <button class="nav" id="adminLogoutBtn"><i>↪</i> Logout</button>
+    </nav>
+    <div class="sidebar-foot"><span class="online-dot"></span> ADMIN SYSTEM ONLINE</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="adminMobileMenu">☰</button>
+      <div class="crumb">FITFLOW / <b id="adminCrumb">DASHBOARD</b></div>
+      <div class="top-actions"><span id="adminToday"></span><button class="icon-btn" id="adminThemeBtn">◐</button><div class="avatar" id="adminAvatar">A</div></div>
+    </header>
+
+    <section class="page active" id="admin-page-overview">
+      <div class="page-head"><div><span class="eyebrow">ADMIN COMMAND CENTER</span><h1>CONTROL<br><em>THE FLOW.</em></h1><p>Monitor registered athletes, plans, engagement and system activity.</p></div><div class="streak admin-status"><small>SYSTEM</small><b>ON</b><span>LIVE</span></div></div>
+      <div class="metric-grid" id="adminMetrics"></div>
+      <div class="admin-grid">
+        <div class="card chart-card"><div class="card-head"><div><span class="eyebrow">USER GROWTH</span><h3>Registration activity</h3></div><span class="live">LOCAL DATA</span></div><canvas id="adminUserChart"></canvas></div>
+        <div class="card"><div class="card-head"><div><span class="eyebrow">RECENT ATHLETES</span><h3>Latest registrations</h3></div><button class="text-btn" data-admin-goto="users">VIEW ALL →</button></div><div id="adminRecentUsers" class="admin-user-list"></div></div>
+      </div>
+      <div class="admin-grid">
+        <div class="card"><span class="eyebrow">FITNESS GOALS</span><h3>What athletes are building</h3><div id="adminGoalBreakdown" class="admin-breakdown"></div></div>
+        <div class="card"><span class="eyebrow">TRAINING ENVIRONMENT</span><h3>Where athletes train</h3><div id="adminLocationBreakdown" class="admin-breakdown"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="admin-page-users">
+      <div class="page-head"><div><span class="eyebrow">ATHLETE DIRECTORY</span><h1>MANAGE<br><em>USERS.</em></h1><p>Search, inspect, suspend or remove registered FITFLOW accounts.</p></div></div>
+      <div class="card">
+        <div class="admin-toolbar"><input id="adminUserSearch" placeholder="Search by username, goal, location or level..."><select id="adminStatusFilter"><option value="all">ALL STATUS</option><option value="active">ACTIVE</option><option value="suspended">SUSPENDED</option></select></div>
+        <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ATHLETE</th><th>GOAL</th><th>PROFILE</th><th>TRAINING</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="adminUsersTable"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="page" id="admin-page-analytics">
+      <div class="page-head"><div><span class="eyebrow">SYSTEM ANALYTICS</span><h1>READ THE<br><em>DATA.</em></h1><p>Aggregated metrics generated from registered athlete data.</p></div></div>
+      <div class="metric-grid" id="adminAnalyticsMetrics"></div>
+      <div class="admin-grid">
+        <div class="card"><span class="eyebrow">DIET FRAMEWORKS</span><h3>Nutrition preferences</h3><div id="adminDietBreakdown" class="admin-breakdown"></div></div>
+        <div class="card"><span class="eyebrow">EXPERIENCE LEVEL</span><h3>Athlete experience</h3><div id="adminLevelBreakdown" class="admin-breakdown"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="admin-page-plans">
+      <div class="page-head"><div><span class="eyebrow">PLAN MONITOR</span><h1>WORKOUT<br><em>+ NUTRITION.</em></h1><p>Inspect the personalized plans currently generated for athletes.</p></div></div>
+      <div class="admin-grid">
+        <div class="card"><span class="eyebrow">WORKOUT PLANS</span><h3 id="adminWorkoutPlansCount">0</h3><p>Accounts with a generated training plan.</p><div id="adminWorkoutPlanList" class="admin-plan-list"></div></div>
+        <div class="card"><span class="eyebrow">NUTRITION PLANS</span><h3 id="adminNutritionPlansCount">0</h3><p>Accounts with a generated 7-day nutrition plan.</p><div id="adminNutritionPlanList" class="admin-plan-list"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="admin-page-checkins">
+      <div class="page-head"><div><span class="eyebrow">WEEKLY FEEDBACK</span><h1>CHECK<br><em>IN.</em></h1><p>Review adherence, energy, sleep, hunger and athlete-reported issues.</p></div></div>
+      <div class="card"><div class="card-head"><div><span class="eyebrow">ALL CHECK-INS</span><h3>Recent athlete feedback</h3></div></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ATHLETE</th><th>DATE</th><th>WEIGHT</th><th>WORKOUT</th><th>DIET</th><th>ENERGY</th><th>STRESS</th><th>NOTES</th></tr></thead><tbody id="adminCheckinsTable"></tbody></table></div></div>
+    </section>
+
+    <section class="page" id="admin-page-settings">
+      <div class="page-head"><div><span class="eyebrow">SYSTEM INFORMATION</span><h1>FITFLOW<br><em>STATUS.</em></h1><p>Current architecture and admin controls for this browser-based demo.</p></div></div>
+      <div class="admin-grid">
+        <div class="card"><span class="eyebrow">APPLICATION</span><h3>FITFLOW v1.0</h3><div class="safety-list"><span>✓ Browser-based HTML / CSS / JavaScript</span><span>✓ LocalStorage persistence</span><span>✓ Personalized workout engine</span><span>✓ Personalized nutrition engine</span><span>✓ Admin monitoring panel</span></div></div>
+        <div class="card"><span class="eyebrow">ADMIN SECURITY</span><h3>Demo environment.</h3><p>Admin and athlete accounts are stored locally in this demo. A production deployment should use secure server-side authentication, authorization and a real database.</p><div class="safety-note">ADMIN ACTIONS CHANGE LOCAL DEMO DATA. USE A SECURE BACKEND BEFORE DEPLOYMENT.</div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ADMIN USER DETAIL MODAL -->
+<div id="adminUserModal" class="modal hidden"><div class="modal-inner admin-detail-modal"><button class="close" id="closeAdminUser">×</button><span class="eyebrow lime">ATHLETE PROFILE</span><div id="adminUserDetail"></div></div></div>
+
+<!-- WORKOUT MODAL -->
+<div id="workoutModal" class="modal hidden"><div class="modal-inner workout-modal"><button class="close" id="closeWorkout">×</button><span class="eyebrow lime">TRAINING MODE</span><div class="timer-circle"><span id="timer">00:00</span><small>SESSION TIME</small></div><h2 id="modalExercise">GET READY.</h2><p id="modalHint">Warm up and prepare.</p><div class="modal-controls"><button class="btn btn-ghost" id="prevEx">←</button><button class="btn btn-lime" id="nextEx">NEXT EXERCISE →</button></div></div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
